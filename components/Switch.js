@@ -1,6 +1,7 @@
 import { sRGBEncoding } from "three";
 import { useEffect, useRef, useState } from "react";
 import { Html } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 export default function Switch() {
 	const ref = useRef();
 	const spaceNoise = new Audio("./mixkit-water-sci-fi-bleep-902.wav");
@@ -21,10 +22,16 @@ export default function Switch() {
 		spaceNoise.play();
 	};
 
+	const changeScale = (x, y, z) => {
+		ref.current.scale.set(x, y, z);
+	};
+
 	if (swich) {
 		updateMaterial(1, true, 1, 1);
+		changeScale(0.75, 0.75, 0.75);
 	} else if (swich === false) {
 		updateMaterial(10, false, 10, 10);
+		changeScale(1, 1, 1);
 	}
 
 	if (count > 10) {
@@ -36,6 +43,12 @@ export default function Switch() {
 		ref.current.material.encoding = sRGBEncoding;
 		ref.current.material.needsUpdate = true;
 	}, []);
+
+	useFrame((state) => {
+		ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.25) * 4;
+		ref.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.25) * 4;
+	});
+
 	return (
 		<mesh
 			onClick={() => {
@@ -46,7 +59,17 @@ export default function Switch() {
 		>
 			<boxGeometry />
 			<meshPhongMaterial color="blue" />
-			<Html>{count}</Html>
+			<Html
+				style={{
+					color: "white",
+					fontSize: "3rem",
+					pointerEvents: "none",
+				}}
+				transform
+				occlude={null}
+			>
+				{count}
+			</Html>
 		</mesh>
 	);
 }

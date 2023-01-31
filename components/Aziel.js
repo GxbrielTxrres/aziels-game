@@ -1,12 +1,9 @@
 import { Float, Text3D } from "@react-three/drei";
-import { useEffect, useRef } from "react";
-import { MeshPhongMaterial } from "three";
-import { useFrame } from "@react-three/fiber";
-
-const material = new MeshPhongMaterial();
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 export default function Aziel(props) {
 	const text = useRef();
-	const ball = useRef();
+	const [spinAmt, setSpinAmt] = useState(false);
 
 	useEffect(() => {
 		text.current.material.toneMapped = false;
@@ -14,23 +11,38 @@ export default function Aziel(props) {
 		text.current.material.color.r = 1.2;
 		text.current.material.color.g = 2.5;
 		text.current.material.color.b = 0;
-	});
+	}, []);
 
-	useFrame((state) => {
-		ball.current.position.x =
-			Math.sin(state.clock.elapsedTime * 0.25) * 1.5;
-
-		ball.current.position.y =
-			Math.cos(state.clock.elapsedTime * 0.25) * 1.5;
-	});
+	const spin = () => {
+		setSpinAmt(!spinAmt);
+		console.log(spinAmt);
+		if (spinAmt) {
+			gsap.to(text.current.rotation, { y: Math.PI * 4, duration: 2 });
+			gsap.to(text.current.rotation, { x: Math.PI / 4, duration: 2 });
+			gsap.to(text.current.position, { z: -5, duration: 2 });
+			gsap.to(text.current.position, { y: 4, duration: 2 });
+			gsap.to(text.current.scale, { x: 1, duration: 2 });
+			gsap.to(text.current.scale, { y: 1, duration: 2 });
+			gsap.to(text.current.scale, { z: 1, duration: 2 });
+		} else {
+			gsap.to(text.current.rotation, { y: Math.PI * -4, duration: 2 });
+			gsap.to(text.current.rotation, { x: Math.PI * 1.9, duration: 2 });
+			gsap.to(text.current.position, { x: -1, duration: 2 });
+			gsap.to(text.current.position, { y: -1, duration: 2 });
+			gsap.to(text.current.position, { z: 1, duration: 2 });
+			gsap.to(text.current.scale, { x: 0.85, duration: 2 });
+			gsap.to(text.current.scale, { y: 0.85, duration: 2 });
+			gsap.to(text.current.scale, { z: 0.85, duration: 2 });
+		}
+	};
 
 	return (
 		<>
-			<mesh ref={ball} position={[0, 0, 0]} material={material}>
-				<sphereGeometry args={[0.2, 32, 32]} />
-			</mesh>
 			<Float>
 				<Text3D
+					onClick={() => {
+						spin();
+					}}
 					ref={text}
 					{...props}
 					rotation-y={Math.PI / 5}
@@ -45,7 +57,6 @@ export default function Aziel(props) {
 					bevelOffset={0}
 					bevelSegments={2}
 					letterSpacing={0.25}
-					material={material}
 				>
 					Aziel
 				</Text3D>
