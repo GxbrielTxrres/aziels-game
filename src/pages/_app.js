@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }) {
 					target={[0, 0.5, -0.5]}
 				/>
 				<ambientLight />
+
 				<Center>
 					<Sparkles
 						count={40}
