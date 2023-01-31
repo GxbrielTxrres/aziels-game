@@ -60,13 +60,12 @@ export default function Switch() {
 			<boxGeometry />
 			<meshPhongMaterial color="blue" />
 			<Html
+				position={[0, -2, 0]}
 				style={{
 					color: "white",
-					fontSize: "3rem",
-					pointerEvents: "none",
+					fontSize: "2rem",
+					userSelect: "none",
 				}}
-				transform
-				occlude={null}
 			>
 				{count}
 			</Html>
