@@ -16,7 +16,7 @@ const material = new MeshPhongMaterial();
 export default function App({ Component, pageProps }) {
 	return (
 		<div className="webgl">
-			<Canvas>
+			<Canvas camera={{ position: [0, 0, 7] }}>
 				<Perf />
 				<Effects />
 				<OrbitControls

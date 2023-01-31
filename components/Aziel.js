@@ -27,9 +27,9 @@ export default function Aziel(props) {
 		} else {
 			gsap.to(text.current.rotation, { y: Math.PI * -4, duration: 2 });
 			gsap.to(text.current.rotation, { x: Math.PI * 1.9, duration: 2 });
-			gsap.to(text.current.position, { x: -1, duration: 2 });
-			gsap.to(text.current.position, { y: -1, duration: 2 });
-			gsap.to(text.current.position, { z: 2, duration: 2 });
+			gsap.to(text.current.position, { x: -1.2, duration: 2 });
+			gsap.to(text.current.position, { y: -2, duration: 2 });
+			gsap.to(text.current.position, { z: 3, duration: 2 });
 			gsap.to(text.current.scale, { x: 0.85, duration: 2 });
 			gsap.to(text.current.scale, { y: 0.85, duration: 2 });
 			gsap.to(text.current.scale, { z: 0.85, duration: 2 });
