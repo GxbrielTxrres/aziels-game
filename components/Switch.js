@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { Html } from "@react-three/drei";
 export default function Switch() {
 	const ref = useRef();
-	const spaceNoise = new Audio("./mixkit-water-sci-fi-bleep-902.wav");
+	const spaceNoise = new Audio();
+	spaceNoise.autoplay = true;
 
 	const [swich, setSwitch] = useState();
 	let [count, setCount] = useState(0);
+
 	const updateMaterial = (
 		color,
 		toneMapped,
@@ -17,6 +19,7 @@ export default function Switch() {
 		ref.current.material.toneMapped = toneMapped;
 		ref.current.material.emissiveIntensity = emissiveIntensity;
 		ref.current.material.emissive.r = emissiveColor;
+		spaceNoise.src = "./mixkit-water-sci-fi-bleep-902.wav";
 		spaceNoise.play();
 	};
 
