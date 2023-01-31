@@ -11,7 +11,12 @@ export default function App({ Component, pageProps }) {
 			<Canvas>
 				<Perf />
 				<Effects />
-				<OrbitControls target={[0, 0.5, -0.5]} />
+				<OrbitControls
+					enablePan={false}
+					minDistance={3.5}
+					maxDistance={10}
+					target={[0, 0.5, -0.5]}
+				/>
 				<ambientLight />
 				<Center>
 					<Sparkles
