@@ -2,12 +2,14 @@ import { sRGBEncoding } from "three";
 import { useEffect, useRef, useState } from "react";
 import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import Number from "./Number";
 export default function Switch() {
 	const ref = useRef();
 	const spaceNoise = new Audio("./mixkit-water-sci-fi-bleep-902.wav");
 
 	const [swich, setSwitch] = useState();
-	let [count, setCount] = useState(0);
+	let [count, setCount] = useState(1);
+	let [color, setColor] = useState("");
 
 	const updateMaterial = (
 		color,
@@ -34,8 +36,8 @@ export default function Switch() {
 		changeScale(1, 1, 1);
 	}
 
-	if (count > 10) {
-		count = 0;
+	if (count > 5) {
+		count = 1;
 	}
 
 	useEffect(() => {
@@ -54,21 +56,13 @@ export default function Switch() {
 			onClick={() => {
 				setCount(count + 1);
 				setSwitch(!swich);
+				setColor(`hsl(${Math.random() * 720}, 80%, 50%)`);
 			}}
 			ref={ref}
 		>
 			<boxGeometry />
 			<meshPhongMaterial color="blue" />
-			<Html
-				position={[0, -2, 0]}
-				style={{
-					color: "white",
-					fontSize: "2rem",
-					userSelect: "none",
-				}}
-			>
-				{count}
-			</Html>
+			<Number color={color} count={count} />
 		</mesh>
 	);
 }

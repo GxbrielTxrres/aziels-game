@@ -1,8 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-
+import gsap from "gsap";
 export default function Ball() {
 	const ball = useRef();
+	const [color, setColor] = useState("");
 
 	useEffect(() => {
 		ball.current.material.toneMapped = false;
@@ -24,9 +25,25 @@ export default function Ball() {
 	});
 
 	return (
-		<mesh ref={ball} position={[0, 0, 0]}>
+		<mesh
+			ref={ball}
+			onClick={() => {
+				setColor(
+					ball.current.material.color.set(
+						`hsl(${Math.random() * 720}, 50%, 50%)`,
+					),
+				);
+				gsap.to(ball.current.material.color, {
+					r: Math.random() * 10,
+					g: Math.random() * 10,
+					b: Math.random() * 10,
+					duration: 1,
+				});
+			}}
+			position={[0, 0, 0]}
+		>
 			<sphereGeometry args={[0.2, 32, 32]} />
-			<meshPhongMaterial />
+			<meshPhongMaterial color={color} />
 		</mesh>
 	);
 }

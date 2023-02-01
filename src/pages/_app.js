@@ -31,10 +31,10 @@ export default function App({ Component, pageProps }) {
 
 				<Center>
 					<Sparkles
-						count={40}
+						count={100}
 						speed={Math.random()}
-						scale={10}
-						size={10}
+						scale={50}
+						size={Math.random() * 10}
 					/>
 					<Aziel position={[-1, 1.5, 0]} />
 					<Ball />

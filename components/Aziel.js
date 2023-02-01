@@ -5,6 +5,25 @@ export default function Aziel(props) {
 	const text = useRef();
 	const [spinAmt, setSpinAmt] = useState(false);
 
+	const animate = (ref, divide, rotX, rotY, posX, posY, posZ, scale) => {
+		gsap.to(ref.current.rotation, {
+			x: divide === true ? Math.PI / rotX : Math.PI * rotX,
+			duration: 2,
+		});
+		gsap.to(ref.current.rotation, {
+			y: Math.PI * rotY,
+			duration: 2,
+		});
+
+		gsap.to(ref.current.position, { x: posX, duration: 2 });
+		gsap.to(ref.current.position, { y: posY, duration: 2 });
+		gsap.to(text.current.position, { z: posZ, duration: 2 });
+
+		gsap.to(ref.current.scale, { x: scale, duration: 2 });
+		gsap.to(ref.current.scale, { y: scale, duration: 2 });
+		gsap.to(ref.current.scale, { z: scale, duration: 2 });
+	};
+
 	useEffect(() => {
 		text.current.material.toneMapped = false;
 		text.current.material.emissiveIntensity = 1.2;
@@ -15,24 +34,10 @@ export default function Aziel(props) {
 
 	const spin = () => {
 		setSpinAmt(!spinAmt);
-		console.log(spinAmt);
 		if (spinAmt) {
-			gsap.to(text.current.rotation, { y: Math.PI * 4, duration: 2 });
-			gsap.to(text.current.rotation, { x: Math.PI / 4, duration: 2 });
-			gsap.to(text.current.position, { z: -5, duration: 2 });
-			gsap.to(text.current.position, { y: 4, duration: 2 });
-			gsap.to(text.current.scale, { x: 1, duration: 2 });
-			gsap.to(text.current.scale, { y: 1, duration: 2 });
-			gsap.to(text.current.scale, { z: 1, duration: 2 });
+			animate(text, true, 4, 4, null, 4, -5, 1);
 		} else {
-			gsap.to(text.current.rotation, { y: Math.PI * -4, duration: 2 });
-			gsap.to(text.current.rotation, { x: Math.PI * 1.9, duration: 2 });
-			gsap.to(text.current.position, { x: -1.2, duration: 2 });
-			gsap.to(text.current.position, { y: -2, duration: 2 });
-			gsap.to(text.current.position, { z: 3, duration: 2 });
-			gsap.to(text.current.scale, { x: 0.85, duration: 2 });
-			gsap.to(text.current.scale, { y: 0.85, duration: 2 });
-			gsap.to(text.current.scale, { z: 0.85, duration: 2 });
+			animate(text, false, -4, 1.9, -1.2, -2, 2, 0.85);
 		}
 	};
 
