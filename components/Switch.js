@@ -1,11 +1,19 @@
 import { sRGBEncoding } from "three";
 import { useEffect, useRef, useState } from "react";
-import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import Number from "./Number";
 export default function Switch() {
 	const ref = useRef();
-	const spaceNoise = new Audio();
+	const spaceNoise = new Audio("mixkit-water-sci-fi-bleep-902.wav");
+	const numberAudio = new Audio();
+
+	let links = [
+		"./sounds/1.mp3",
+		"./sounds/2.mp3",
+		"./sounds/3.mp3",
+		"./sounds/4.mp3",
+		"./sounds/5.mp3",
+	];
 
 	const [swich, setSwitch] = useState();
 	let [count, setCount] = useState(1);
@@ -21,8 +29,9 @@ export default function Switch() {
 		ref.current.material.toneMapped = toneMapped;
 		ref.current.material.emissiveIntensity = emissiveIntensity;
 		ref.current.material.emissive.r = emissiveColor;
-		spaceNoise.src = "./mixkit-water-sci-fi-bleep-902.wav";
 		spaceNoise.play();
+		numberAudio.src = count === 6 ? links[count - 6] : links[count - 1];
+		numberAudio.play();
 	};
 
 	const changeScale = (x, y, z) => {

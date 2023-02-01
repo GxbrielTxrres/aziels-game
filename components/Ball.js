@@ -4,6 +4,9 @@ import gsap from "gsap";
 
 export default function Ball() {
 	const ball = useRef();
+
+	const audio = new Audio("./paparecording.mp3");
+
 	const [color, setColor] = useState("");
 	const [scale, setScale] = useState();
 
@@ -23,6 +26,8 @@ export default function Ball() {
 
 	if (scale) {
 		animateScaleOf(2, 2, 2);
+		audio.currentTime = 0;
+		audio.play();
 	} else if (scale === false) {
 		animateScaleOf(3, 3, 3);
 	}
