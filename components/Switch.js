@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import Number from "./Number";
 export default function Switch() {
 	const ref = useRef();
-	const spaceNoise = new Audio("./mixkit-water-sci-fi-bleep-902.wav");
+	const spaceNoise = new Audio();
 
 	const [swich, setSwitch] = useState();
 	let [count, setCount] = useState(1);
@@ -21,6 +21,7 @@ export default function Switch() {
 		ref.current.material.toneMapped = toneMapped;
 		ref.current.material.emissiveIntensity = emissiveIntensity;
 		ref.current.material.emissive.r = emissiveColor;
+		spaceNoise.src = "./mixkit-water-sci-fi-bleep-902.wav";
 		spaceNoise.play();
 	};
 
