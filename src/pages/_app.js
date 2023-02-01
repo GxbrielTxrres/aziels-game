@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
 				<Effects />
 				<OrbitControls
 					enableDamping
-					dampingFactor={0.01}
+					dampingFactor={0.03}
 					enablePan={false}
 					minDistance={3.5}
 					maxDistance={10}

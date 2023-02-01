@@ -42,6 +42,7 @@ export default function Ball() {
 	return (
 		<mesh
 			ref={ball}
+			scale={2}
 			onClick={() => {
 				setColor(
 					ball.current.material.color.set(
