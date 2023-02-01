@@ -33,8 +33,8 @@ export default function App({ Component, pageProps }) {
 					<Sparkles
 						count={100}
 						speed={Math.random()}
-						scale={50}
-						size={Math.random() * 10}
+						scale={20}
+						size={Math.random() * 20}
 					/>
 					<Aziel position={[-1, 1.5, 0]} />
 					<Ball />

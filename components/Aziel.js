@@ -17,7 +17,7 @@ export default function Aziel(props) {
 
 		gsap.to(ref.current.position, { x: posX, duration: 2 });
 		gsap.to(ref.current.position, { y: posY, duration: 2 });
-		gsap.to(text.current.position, { z: posZ, duration: 2 });
+		gsap.to(ref.current.position, { z: posZ, duration: 2 });
 
 		gsap.to(ref.current.scale, { x: scale, duration: 2 });
 		gsap.to(ref.current.scale, { y: scale, duration: 2 });

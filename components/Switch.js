@@ -56,7 +56,7 @@ export default function Switch() {
 			onClick={() => {
 				setCount(count + 1);
 				setSwitch(!swich);
-				setColor(`hsl(${Math.random() * 720}, 80%, 50%)`);
+				setColor(`hsl(${Math.random() * 720}, 90%, 70%)`);
 			}}
 			ref={ref}
 		>

@@ -17,7 +17,13 @@ export default function Number({ count, color }) {
 	});
 
 	return (
-		<Text ref={text} material={material} position={[0, -2, 0]}>
+		<Text
+			outlineColor={[1, 0, 0]}
+			outlineWidth={0.04}
+			ref={text}
+			material={material}
+			position={[0, -2, 0]}
+		>
 			{count}
 		</Text>
 	);
