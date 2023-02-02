@@ -16,6 +16,9 @@ import {
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { MeshPhongMaterial } from "three";
+import { Debug, Physics } from "@react-three/rapier";
+import SpinningBalls from "components/SpinningBalls";
+import PhysicsBalls from "components/PhysicsBalls";
 
 const material = new MeshPhongMaterial();
 
@@ -35,7 +38,15 @@ export default function App({ Component, pageProps }) {
 					target={[0, -2, 1]}
 				/>
 
-				<Plane material={material} />
+				<Physics
+					timeStep="vary"
+					colliders="hull"
+					gravity={[0, -9.82, 0]}
+				>
+					<Plane material={material} />
+					<PhysicsBalls material={material} />
+					{/* <Debug /> */}
+				</Physics>
 
 				<Center position={[0, -2, 0]}>
 					<Stars
@@ -45,6 +56,7 @@ export default function App({ Component, pageProps }) {
 						factor={7.5}
 						count={6000}
 					/>
+					<SpinningBalls material={material} />
 					<Aziel position={[-4, 1.5, 4]} />
 					<Ball />
 
