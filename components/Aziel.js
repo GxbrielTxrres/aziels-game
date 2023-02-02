@@ -26,9 +26,9 @@ export default function Aziel(props) {
 
 	useEffect(() => {
 		text.current.material.toneMapped = false;
-		text.current.material.emissiveIntensity = 1.2;
+		text.current.material.emissiveIntensity = 0.5;
 		text.current.material.color.r = 1.2;
-		text.current.material.color.g = 2.5;
+		text.current.material.color.g = 3;
 		text.current.material.color.b = 0;
 	}, []);
 
@@ -50,15 +50,15 @@ export default function Aziel(props) {
 					}}
 					ref={text}
 					{...props}
-					rotation-y={Math.PI / 5}
+					rotation-y={Math.PI / 6}
 					rotation-z={Math.PI / 6}
 					font="./fonts/helvetiker_regular.typeface.json"
-					size={0.75}
+					size={1.5}
 					height={0.2}
 					curveSegments={12}
 					bevelEnabled
 					bevelThickness={0.02}
-					bevelSize={0.04}
+					bevelSize={0.01}
 					bevelOffset={0}
 					bevelSegments={2}
 					letterSpacing={0.25}

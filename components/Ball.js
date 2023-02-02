@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
+import { Color } from "three";
 
 export default function Ball() {
 	const ball = useRef();
 
-	const audio = new Audio("./paparecording.mp3");
+	const [audio] = useState(() => new Audio("./paparecording.mp3"));
 
 	const [color, setColor] = useState("");
 	const [scale, setScale] = useState();
@@ -25,11 +26,11 @@ export default function Ball() {
 	}, []);
 
 	if (scale) {
-		animateScaleOf(2, 2, 2);
+		animateScaleOf(3, 3, 3);
 		audio.currentTime = 0;
 		audio.play();
 	} else if (scale === false) {
-		animateScaleOf(3, 3, 3);
+		animateScaleOf(2, 2, 2);
 	}
 
 	useFrame((state) => {
@@ -50,14 +51,16 @@ export default function Ball() {
 			scale={2}
 			onClick={() => {
 				setColor(
-					ball.current.material.color.set(
-						`hsl(${Math.random() * 720}, 70%, 80%)`,
+					new Color(
+						Math.random() * 10,
+						Math.random() * 10,
+						Math.random() * 10,
 					),
 				);
 				gsap.to(ball.current.material.color, {
-					r: Math.random() * 10,
-					g: Math.random() * 10,
-					b: Math.random() * 10,
+					r: color ? color.r : Math.random() * 10,
+					g: color ? color.g : Math.random() * 10,
+					b: color ? color.b : Math.random() * 10,
 					duration: 1,
 				});
 				setScale(!scale);

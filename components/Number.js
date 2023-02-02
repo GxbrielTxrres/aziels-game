@@ -7,7 +7,8 @@ export default function Number({ count, color }) {
 	const text = useRef();
 
 	const material = new MeshPhongMaterial({
-		emissiveIntensity: 2,
+		emissiveIntensity: 20,
+		toneMapped: false,
 		color: color,
 		side: DoubleSide,
 	});
@@ -18,6 +19,7 @@ export default function Number({ count, color }) {
 
 	return (
 		<Text
+			fontSize={1.5}
 			outlineColor={[1, 0, 0]}
 			outlineWidth={0.04}
 			ref={text}

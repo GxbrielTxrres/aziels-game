@@ -1,11 +1,14 @@
-import { sRGBEncoding } from "three";
+import { Color, sRGBEncoding } from "three";
 import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import Number from "./Number";
+import gsap from "gsap";
 export default function Switch() {
 	const ref = useRef();
-	const spaceNoise = new Audio("mixkit-water-sci-fi-bleep-902.wav");
-	const numberAudio = new Audio();
+	const [spaceNoise] = useState(
+		() => new Audio("mixkit-water-sci-fi-bleep-902.wav"),
+	);
+	const [numberAudio] = useState(() => new Audio("./sounds/1.mp3"));
 
 	let links = [
 		"./sounds/1.mp3",
@@ -17,7 +20,7 @@ export default function Switch() {
 
 	const [swich, setSwitch] = useState();
 	let [count, setCount] = useState(1);
-	let [color, setColor] = useState("");
+	let [color, setColor] = useState(new Color(10, 0, 0));
 
 	const updateMaterial = (
 		color,
@@ -35,7 +38,9 @@ export default function Switch() {
 	};
 
 	const changeScale = (x, y, z) => {
-		ref.current.scale.set(x, y, z);
+		gsap.to(ref.current.scale, { x: x, duration: 1, ease: "easeOut" });
+		gsap.to(ref.current.scale, { y: y, duration: 1, ease: "easeOut" });
+		gsap.to(ref.current.scale, { z: z, duration: 1, ease: "easeOut" });
 	};
 
 	if (swich) {
@@ -66,10 +71,17 @@ export default function Switch() {
 			onClick={() => {
 				setCount(count + 1);
 				setSwitch(!swich);
-				setColor(`hsl(${Math.random() * 720}, 90%, 70%)`);
+				setColor(
+					new Color(
+						Math.random() * 10,
+						Math.random() * 10,
+						Math.random() * 10,
+					),
+				);
 			}}
 			ref={ref}
 		>
+			<ambientLight />
 			<boxGeometry />
 			<meshPhongMaterial color="blue" />
 			<Number color={color} count={count} />
