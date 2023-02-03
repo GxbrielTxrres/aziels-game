@@ -50,11 +50,13 @@ export default function PhysicsBalls() {
 				instancedRef.current
 					.at(i)
 					.setTranslation({ x: 0, y: 0, z: -5 });
+
 				instancedRef.current.at(i).setLinvel({
 					x: 2 + Math.random() * Math.sin(2),
 					y: 0,
 					z: 0,
 				});
+
 				instancedRef.current.at(i).setAngvel({
 					x: 2 + Math.random() * 2,
 					y: 0,

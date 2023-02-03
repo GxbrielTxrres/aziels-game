@@ -1,10 +1,11 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { TorusGeometry } from "three";
+import { Color, TorusGeometry } from "three";
 
 const torus = new TorusGeometry();
 export default function ParticleTorus() {
 	const points = useRef();
+	const color = new Color(20, 20, 20);
 
 	useFrame((state) => {
 		points.current.rotation.x =
@@ -17,8 +18,8 @@ export default function ParticleTorus() {
 	});
 
 	return (
-		<points ref={points} geometry={torus}>
-			<pointsMaterial size={0.01} />
+		<points scale={1.5} ref={points} geometry={torus}>
+			<pointsMaterial toneMapped={false} color={color} size={0.03} />
 		</points>
 	);
 }
