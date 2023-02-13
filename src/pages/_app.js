@@ -10,10 +10,15 @@ import SpinningBalls from "components/SpinningBalls";
 import PhysicsBalls from "components/PhysicsBalls";
 
 import { Canvas } from "@react-three/fiber";
-import { Center, OrbitControls, Stars } from "@react-three/drei";
+import {
+	Center,
+	OrbitControls,
+	ScrollControls,
+	Stars,
+} from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { MeshPhongMaterial } from "three";
-import { Physics } from "@react-three/rapier";
+import { BallCollider, Physics } from "@react-three/rapier";
 
 const material = new MeshPhongMaterial();
 
@@ -44,11 +49,9 @@ export default function App({ Component, pageProps }) {
 	return (
 		<div className="webgl">
 			<Canvas camera={{ position: [-2, 2, 12], far: 200, fov: 60 }}>
-				<Perf />
 				<Effects />
 
-				<OrbitControls {...orbitControlProps} />
-
+				<OrbitControls makeDefault />
 				<Physics {...physicsProps}>
 					<Plane material={material} />
 					<PhysicsBalls material={material} />

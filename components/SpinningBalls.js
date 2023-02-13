@@ -1,19 +1,26 @@
 import { Vector3, Matrix4, Quaternion, Color } from "three";
 import { useRef, useLayoutEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-
+import { useScroll } from "@react-three/drei";
+import gsap from "gsap";
+import { MathUtils } from "three";
 export default function SpinningBalls({ material }) {
 	const instancedRef = useRef();
 
-	const ballsCount = 100;
+	const ballsCount = 50;
 	const matrix = new Matrix4();
 	let colors = new Color();
+
 
 	useLayoutEffect(() => {
 		for (let i = 0; i < ballsCount; i++) {
 			const scale = 0.2 + Math.abs(Math.sin(i) * 7) + 2;
 			matrix.compose(
-				new Vector3(Math.sin(i + 4) * 50, Math.cos(i + 4) * 50, i * 2),
+				new Vector3(Math.sin(i + 4) * 50, Math.cos(i + 4) * 50, i * 10),
+				// new Vector3(
+				// 	Math.sqrt(Math.abs(Math.sin(i * 3) * 20)) * 20,
+				// 	Math.sin(i * 3) * 50,
+				// 	0,
 				new Quaternion(),
 				new Vector3(scale, scale, scale),
 			);
@@ -37,6 +44,23 @@ export default function SpinningBalls({ material }) {
 	}, []);
 
 	useFrame((state) => {
+		// const offset = scroll.offset;
+		// for (let i = 0; i < 200; i++) {
+		// state.camera.position.x = Math.sqrt(
+		// 	Math.abs(Math.sin(offset - 0.75 / 2 + i * 3) * 20),
+		// );
+		// state.camera.position.z =
+		// 	Math.sqrt(Math.abs(Math.cos(offset - 0.75 / 2 + i * 3))) * 5;
+
+		// 	state.camera.position.x = Math.sqrt(
+		// 		Math.abs(Math.sin(offset + i * 3) * 40) * 20,
+		// 	);
+		// 	MathUtils
+		// 	state.camera.position.z = Math.sin(offset + i * 3) * 20;
+		// }
+
+		// state.camera.lookAt(0, 0, 0);
+
 		instancedRef.current.rotation.z =
 			Math.sin(state.clock.elapsedTime * 0.1) * 20;
 		instancedRef.current.position.y =

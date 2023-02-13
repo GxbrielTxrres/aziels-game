@@ -3,7 +3,6 @@ import { extend, useFrame } from "@react-three/fiber";
 import vertexShader from "@/shaders/vertexShader";
 import fragmentShader from "@/shaders/fragmentShader";
 import { useRef } from "react";
-import { useControls } from "leva";
 import { Color } from "three";
 import { RigidBody } from "@react-three/rapier";
 
@@ -18,8 +17,6 @@ extend({ PlaneShader });
 export default function Plane({ material }) {
 	const plane = useRef();
 
-	const { color } = useControls("shader", { color: { value: "#f800ff" } });
-
 	useFrame((state) => {
 		plane.current.material.uniforms.uTime.value = state.clock.elapsedTime;
 	});
@@ -28,7 +25,7 @@ export default function Plane({ material }) {
 		<RigidBody type="fixed">
 			<mesh ref={plane} rotation-x={-Math.PI / 2} position-y={-5}>
 				<planeGeometry args={[20, 20]} />
-				<planeShader uColor={color} />
+				<planeShader uColor="#f800ff" />
 			</mesh>
 		</RigidBody>
 	);
