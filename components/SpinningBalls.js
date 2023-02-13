@@ -11,12 +11,11 @@ export default function SpinningBalls({ material }) {
 	const matrix = new Matrix4();
 	let colors = new Color();
 
-
 	useLayoutEffect(() => {
 		for (let i = 0; i < ballsCount; i++) {
-			const scale = 0.2 + Math.abs(Math.sin(i) * 7) + 2;
+			const scale = 0.5 + Math.abs(Math.sin(i) * 7) + 2;
 			matrix.compose(
-				new Vector3(Math.sin(i + 4) * 50, Math.cos(i + 4) * 50, i * 10),
+				new Vector3(Math.sin(i + 4) * 50, Math.cos(i + 4) * 50, i * 5),
 				// new Vector3(
 				// 	Math.sqrt(Math.abs(Math.sin(i * 3) * 20)) * 20,
 				// 	Math.sin(i * 3) * 50,

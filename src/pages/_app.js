@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }) {
 			<Canvas camera={{ position: [-2, 2, 12], far: 200, fov: 60 }}>
 				<Effects />
 
-				<OrbitControls makeDefault />
+				<OrbitControls {...orbitControlProps} makeDefault />
 				<Physics {...physicsProps}>
 					<Plane material={material} />
 					<PhysicsBalls material={material} />
